@@ -2,7 +2,12 @@ import pygame
 import uuid
 
 from constants import WINDOW_WIDTH, WINDOW_HEIGHT
-from support import timeout, get_rects_collided, rotate_pivot, convert_vector_to_angle
+from support import (
+    timeout,
+    get_rects_collided,
+    rotate_pivot,
+    convert_vector_to_angle
+)
 from .bullet import Bullet
 
 PLAYER_WIDTH, PLAYER_HEIGHT = 96, 96

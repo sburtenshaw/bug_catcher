@@ -28,14 +28,14 @@ class Game:
 
         self.load_title()
 
-    def load_level(self):
-        self.view = Level(self.screen, self.load_title, self.high_score)
-
     def load_title(self, score=None):
         if score and score > self.high_score:
             self.high_score = score
 
         self.view = Title(self.screen, self.load_level, self.high_score)
+
+    def load_level(self):
+        self.view = Level(self.screen, self.load_title, self.high_score)
 
     def update(self, dt):
         self.view.update(dt)
