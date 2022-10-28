@@ -2,8 +2,7 @@ import sys
 import pygame
 import time
 
-from title import Title
-from level import Level
+from game import Game
 
 from constants import WINDOW_SIZE, FRAMERATE
 
@@ -11,7 +10,7 @@ pygame.init()
 pygame.font.init()
 
 
-class Game:
+class Main:
     def __init__(self, window_size, framerate):
         self.window_size = window_size
         self.framerate = framerate
@@ -20,28 +19,15 @@ class Game:
         self.clock = pygame.time.Clock()
         self.last_time = time.time()
 
-        self.high_score = 0
-
-        self.view = None
-
         pygame.display.set_caption('Bug Catcher')
 
-        self.load_title()
-
-    def load_title(self, score=None):
-        if score and score > self.high_score:
-            self.high_score = score
-
-        self.view = Title(self.screen, self.load_level, self.high_score)
-
-    def load_level(self):
-        self.view = Level(self.screen, self.load_title, self.high_score)
+        self.game = Game(self.screen)
 
     def update(self, dt):
-        self.view.update(dt)
+        self.game.update(dt)
 
     def draw(self):
-        self.view.draw()
+        self.game.draw()
 
     def loop(self):
         while True:
@@ -59,5 +45,5 @@ class Game:
             self.clock.tick(self.framerate)
 
 
-game = Game(WINDOW_SIZE, FRAMERATE)
-game.loop()
+main = Main(WINDOW_SIZE, FRAMERATE)
+main.loop()
