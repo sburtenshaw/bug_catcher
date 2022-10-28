@@ -10,6 +10,22 @@ def timeout(function, time, *args, **kwargs):
     return t
 
 
+def update_or_delete(items, dt):
+    # list of ids to delete
+    items_to_delete = []
+
+    # add items set to delete to array or update items
+    for item in items.values():
+        if item.delete:
+            items_to_delete.append(item.id)
+        else:
+            item.update(dt)
+
+    # delete items that are in array
+    for item_id in items_to_delete:
+        del items[item_id]
+
+
 def get_rect_visible(rect):
     return (
         rect.x + rect.width > 0 and

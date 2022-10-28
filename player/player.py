@@ -6,7 +6,8 @@ from support import (
     timeout,
     get_rects_collided,
     rotate_pivot,
-    convert_vector_to_angle
+    convert_vector_to_angle,
+    update_or_delete
 )
 from .bullet import Bullet
 
@@ -63,12 +64,12 @@ class Player:
         self.set_firing(True)
 
         # generate a unique identifier for the bullet
-        bullet_id = uuid.uuid4()
-        self.bullets[bullet_id] = Bullet(
+        id = uuid.uuid4()
+        self.bullets[id] = Bullet(
             self.screen,
             pygame.math.Vector2(self.player_rect.center),
             self.get_bullet_direction(),
-            bullet_id,
+            id,
             self.bugs
         )
 
@@ -116,21 +117,6 @@ class Player:
         if keys_pressed[pygame.K_SPACE] and not self.firing:
             self.fire_bullet()
 
-    def update_bullets(self, dt):
-        # list of bullet ids to delete
-        bullets_to_delete = []
-
-        # add bullets set to delete to array or update bullets
-        for bullet in self.bullets.values():
-            if bullet.delete:
-                bullets_to_delete.append(bullet.bullet_id)
-            else:
-                bullet.update(dt)
-
-        # delete bullets that are in array
-        for bullet_id in bullets_to_delete:
-            del self.bullets[bullet_id]
-
     def check_bug_collision(self):
         for bug in self.bugs.values():
             if get_rects_collided(self.player_rect, bug.bug_rect) and bug.stuck:
@@ -152,7 +138,7 @@ class Player:
 
         self.check_bug_collision()
 
-        self.update_bullets(dt)
+        update_or_delete(self.bullets, dt)
 
     def draw(self):
         # draw bullets

@@ -12,11 +12,11 @@ BULLET_SPEED = 10
 
 
 class Bullet:
-    def __init__(self, screen, initial_position, direction, bullet_id, bugs):
+    def __init__(self, screen, initial_position, direction, id, bugs):
         self.screen = screen
         self.initial_position = initial_position
         self.direction = direction
-        self.bullet_id = bullet_id
+        self.id = id
         self.bugs = bugs
 
         self.bullet_image = self.get_bullet_image()

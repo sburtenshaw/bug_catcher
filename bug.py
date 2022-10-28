@@ -10,10 +10,10 @@ BUG_MAX_STUCK = 5000
 
 
 class Bug:
-    def __init__(self, screen, player,  bug_id):
+    def __init__(self, screen, player,  id):
         self.screen = screen
         self.player = player
-        self.bug_id = bug_id
+        self.id = id
 
         self.first_visible = False
         self.stuck = False
@@ -77,7 +77,8 @@ class Bug:
             self.first_visible = True
         elif not get_rect_visible(self.bug_rect) and self.first_visible:
             self.delete = True
-            self.player.lost += 1
+            if self.player:
+                self.player.lost += 1
 
     def draw(self):
         self.screen.blit(self.bug_image, self.bug_rect)

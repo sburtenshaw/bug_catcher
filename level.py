@@ -4,6 +4,8 @@ import uuid
 from player import Player
 from bug import Bug
 
+from support import update_or_delete
+
 MAX_BUGS = 10
 MAX_LOST = 10
 BUG_SPAWN_TIME = 15000
@@ -27,25 +29,10 @@ class Level:
         self.score_text = pygame.font.SysFont('Comic Sans MS', 32)
         self.lost_text = pygame.font.SysFont('Comic Sans MS', 32)
 
-    def update_bugs(self, dt):
-        # list of bug ids to delete
-        bugs_to_delete = []
-
-        # add bugs set to delete to array or update bugs
-        for bug in self.bugs.values():
-            if bug.delete:
-                bugs_to_delete.append(bug.bug_id)
-            else:
-                bug.update(dt)
-
-        # delete bugs that are in array
-        for bug_id in bugs_to_delete:
-            del self.bugs[bug_id]
-
     def create_bug(self):
         # generate a unique identifier for the bug
-        bug_id = uuid.uuid4()
-        self.bugs[bug_id] = Bug(self.screen, self.player, bug_id)
+        id = uuid.uuid4()
+        self.bugs[id] = Bug(self.screen, self.player, id)
 
     def create_bugs(self):
         # get the current time elapsed in the game
@@ -68,7 +55,7 @@ class Level:
 
         self.player.update(dt)
 
-        self.update_bugs(dt)
+        update_or_delete(self.bugs, dt)
 
         self.create_bugs()
 
