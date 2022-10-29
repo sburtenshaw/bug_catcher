@@ -8,7 +8,7 @@ from support import (
 )
 
 BULLET_WIDTH, BULLET_HEIGHT = 24, 24
-BULLET_SPEED = 10
+BULLET_SPEED = 0.6
 
 
 class Bullet:

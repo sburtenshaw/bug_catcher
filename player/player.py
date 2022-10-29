@@ -12,7 +12,7 @@ from support import (
 from .bullet import Bullet
 
 PLAYER_WIDTH, PLAYER_HEIGHT = 96, 96
-PLAYER_SPEED = 5
+PLAYER_SPEED = 0.3
 PLAYER_FIRE_DELAY = 500
 
 

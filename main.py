@@ -1,6 +1,5 @@
 import sys
 import pygame
-import time
 
 from game import Game
 
@@ -17,7 +16,6 @@ class Main:
 
         self.screen = pygame.display.set_mode(self.window_size)
         self.clock = pygame.time.Clock()
-        self.last_time = time.time()
 
         pygame.display.set_caption('Bug Catcher')
 
@@ -35,14 +33,12 @@ class Main:
                 if event.type == pygame.QUIT:
                     sys.exit()
 
-            dt = (time.time() - self.last_time) * self.framerate
-            self.last_time = time.time()
+            dt = self.clock.tick(self.framerate)
 
             self.update(dt)
             self.draw()
 
             pygame.display.flip()
-            self.clock.tick(self.framerate)
 
 
 main = Main(WINDOW_SIZE, FRAMERATE)

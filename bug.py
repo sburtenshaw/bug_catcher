@@ -5,7 +5,7 @@ from constants import WINDOW_HEIGHT, WINDOW_WIDTH
 from support import timeout, get_rect_visible, rotate_pivot
 
 BUG_WIDTH, BUG_HEIGHT = 32, 32
-BUG_SPEED = 3
+BUG_SPEED = 0.2
 BUG_MAX_STUCK = 5000
 
 
